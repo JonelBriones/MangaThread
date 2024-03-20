@@ -1,9 +1,9 @@
 import { BsThreeDots } from "react-icons/bs";
-import { GoHeart, GoHeartFill, GoPaperAirplane } from "react-icons/go";
+import { GoHeart, GoPaperAirplane } from "react-icons/go";
 import { AiOutlineMessage, AiOutlineRetweet } from "react-icons/ai";
 import { LuDot } from "react-icons/lu";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
-import { FAKE_DATA_USERS } from "../data/data";
+import { FAKE_DATA_USERS, FAKE_DATA_PROFILE } from "../data/data";
 type Thread = {
   id: 0;
   manga: string;
@@ -20,8 +20,9 @@ type User = {
 };
 
 const ThreadCard = ({ user, id, icon, threads }: User) => {
+  const darkMode = FAKE_DATA_PROFILE.mode;
   return (
-    <div>
+    <div className="text-black dark:text-white">
       {threads?.map((thread) => (
         <div key={thread.id} className="my-2 border-t-2 border-neutral-100">
           <div className="my-2">
@@ -36,9 +37,10 @@ const ThreadCard = ({ user, id, icon, threads }: User) => {
                   <HiOutlinePlusCircle
                     size={"1.4rem"}
                     className=" fill-white add-user-icon"
+                    color="black"
                   />
                 </div>
-                <span className="">{user}</span>
+                <span>{user}</span>
               </div>
               <div className="flex gap-2 place-items-center">
                 <span className="opacity-60">23h</span>

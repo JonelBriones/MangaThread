@@ -1,8 +1,9 @@
-export const FAKE_DATA_PROFILE = {
+const FAKE_DATA_PROFILE = {
   user: "ijonel906",
   id: 906,
   icon: "https://lh3.googleusercontent.com/ogw/AF2bZyguZwD8JOe52YGQuoTJ4azrOXJukSvFq2a391Y9=s32-c-mo",
-  mode: "light",
+
+  mode: true,
   threads: [
     {
       id: 0,
@@ -54,7 +55,7 @@ export const FAKE_DATA_PROFILE = {
     },
   ],
 };
-export const FAKE_DATA_USERS = [
+const FAKE_DATA_USERS = [
   {
     user: "JOSH",
     id: 4242,
@@ -72,7 +73,7 @@ export const FAKE_DATA_USERS = [
   },
 ];
 
-export const FAKE_DATA_MANAGA = [
+const FAKE_DATA_MANGAS = [
   {
     title: "Dragonball",
     author: "Akira Toriyama",
@@ -81,6 +82,27 @@ export const FAKE_DATA_MANAGA = [
   {
     title: "One Piece",
     author: "Echiro Oda",
-    id: 222,
+    id: 333,
+  },
+  {
+    title: "Oe Piece",
+    author: "Echiro Oda",
+    id: 444,
+  },
+  {
+    title: "One Piec",
+    author: "Echiro Oda",
+    id: 255522,
+  },
+  {
+    title: "One Pie",
+    author: "Echiro Oda",
+    id: 22632,
+  },
+  {
+    title: "Oe ece",
+    author: "Echiro Oda",
+    id: 245,
   },
 ];
+export { FAKE_DATA_MANGAS, FAKE_DATA_PROFILE, FAKE_DATA_USERS };

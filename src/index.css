@@ -6,4 +6,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   font-style: normal;
+  transition: all 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out;
+  transition-delay: background-color 1s;
 }
