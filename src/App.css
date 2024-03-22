@@ -7,3 +7,15 @@
   width: 600px;
   height: 240px;
 }
+.home-icon {
+  transition: all 200ms ease-in-out;
+}
+.home-icon:hover {
+  scale: 1.05;
+}
+.menu-hover {
+  color: #a3a3a3;
+}
+.menu-hover:hover {
+  color: white;
+}

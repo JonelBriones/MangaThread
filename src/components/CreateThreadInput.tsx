@@ -37,19 +37,34 @@ const CreateThreadInput = () => {
   const [thread, setThread] = useState<Thread | null>(null);
   const [threadInput, setThreadInput] = useState<Thread>(defaultThreadForm);
   const [showCreateModel, setShowCreateModel] = useState(false);
-  const darkMode = FAKE_DATA_PROFILE.mode;
-  const mangaRef = useRef<HTMLDivElement | null>(null);
   const [onShowSelect, setOnShowSelect] = useState(0);
+  const [searchManga, setSearchManga] = useState("");
+  const [searchMangaResults, setSearchMangaResults] = useState<Manga[]>([]);
+  const [selectManga, setSelectManga] = useState("");
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setThreadInput((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
+
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setThread(threadInput);
     setThreadInput(defaultThreadForm);
+  };
+
+  const onSearchManga = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    value.toLocaleLowerCase;
+    setSearchMangaResults(
+      FAKE_DATA_MANGAS.filter((manga: Manga) =>
+        manga.title.toLocaleLowerCase().includes(value)
+      )
+    );
+    setSearchManga(value);
   };
 
   useEffect(() => {
@@ -64,41 +79,6 @@ const CreateThreadInput = () => {
       document.removeEventListener("mousedown", handler);
     };
   }, [showCreateModel]);
-
-  const [searchManga, setSearchManga] = useState("");
-  const [searchMangaResults, setSearchMangaResults] = useState<Manga[]>([]);
-  const [selectManga, setSelectManga] = useState("");
-  const onSearchManga = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    value.toLocaleLowerCase;
-    setSearchManga(value);
-    setSearchMangaResults(
-      FAKE_DATA_MANGAS.filter((manga: Manga) =>
-        manga.title.toLocaleLowerCase().includes(value)
-      )
-    );
-    setSearchManga(value);
-  };
-
-  //   useEffect(() => {
-  //     if (searchManga == "") {
-  //       return;
-  //     }
-  //     async function findSearch() {
-  //       let results = await FAKE_DATA_MANGAS.filter((manga: Manga) =>
-  //         manga.title.toLocaleLowerCase().includes(searchManga)
-  //       );
-
-  //       setSearchMangaResults(results);
-  //     }
-  //     findSearch();
-  //     // setSearchMangaResults(
-  //     //   FAKE_DATA_MANGAS.filter((manga: Manga) =>
-  //     //     manga.title.toLocaleLowerCase().includes(searchManga)
-  //     //   )
-  //     // );
-  //     console.log(searchMangaResults);
-  //   }, [searchManga]);
 
   return (
     <div>
@@ -143,22 +123,23 @@ const CreateThreadInput = () => {
                         />
                         <div className="flex justify-between w-full">
                           <div className="flex-col">
-                            {searchMangaResults?.map((manga: Manga) => (
-                              <div
-                                key={manga.id}
-                                onMouseEnter={() => setOnShowSelect(manga.id)}
-                                onMouseLeave={() => setOnShowSelect(0)}
-                                className="flex gap-2 justify-between items-center cursor-pointer"
-                                onClick={() => setSelectManga(manga.title)}
-                              >
-                                {onShowSelect == manga.id && (
-                                  <FaCheck size={"1.5rem"} />
-                                )}
-                                <p className="text-lg font-medium">
-                                  {manga.title}
-                                </p>
-                              </div>
-                            ))}
+                            {searchManga != "" &&
+                              searchMangaResults?.map((manga: Manga) => (
+                                <div
+                                  key={manga.id}
+                                  onMouseEnter={() => setOnShowSelect(manga.id)}
+                                  onMouseLeave={() => setOnShowSelect(0)}
+                                  className="flex gap-2 justify-between items-center cursor-pointer"
+                                  onClick={() => setSelectManga(manga.title)}
+                                >
+                                  {onShowSelect == manga.id && (
+                                    <FaCheck size={"1.5rem"} />
+                                  )}
+                                  <p className="text-lg font-medium">
+                                    {manga.title}
+                                  </p>
+                                </div>
+                              ))}
                           </div>
                         </div>
                       </div>

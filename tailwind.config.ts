@@ -18,6 +18,11 @@ export default {
       minWidth: {
         "30": "480px",
       },
+      colors: {
+        "neutral-900": "#171717",
+        "neutral-200": "#e5e5e5",
+        "dark-medium": "#a3a3a3",
+      },
     },
   },
   darkMode: "selector",
