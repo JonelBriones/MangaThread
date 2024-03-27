@@ -22,12 +22,16 @@ const FAKE_DATA_PROFILE = {
       manga: "One Piece",
       text: "FIND THE TREASURE!!!",
       likes: ["Toriyama", "Josh"],
-      // replies: [
-      //   {
-      //     user: "Toriyama",
-      //     comment: "Thank you!!",
-      //   },
-      // ],
+      replies: [
+        {
+          user: "josh",
+          comment: "Thank you!!",
+        },
+        {
+          user: "Naruto",
+          comment: "Thank you!!",
+        },
+      ],
     },
     {
       id: 204,
@@ -35,7 +39,19 @@ const FAKE_DATA_PROFILE = {
       text: "My favorite managa ever!!!  assumenda hic temporibus commodi maiores eius suscipit estnobis  ",
       replies: [
         {
-          user: "Toriyama",
+          user: "josh",
+          comment: "Thank you!!",
+        },
+        {
+          user: "Naruto",
+          comment: "Thank you!!",
+        },
+        {
+          user: "josh",
+          comment: "Thank you!!",
+        },
+        {
+          user: "Naruto",
           comment: "Thank you!!",
         },
       ],
@@ -45,19 +61,14 @@ const FAKE_DATA_PROFILE = {
       id: 10,
       manga: "Nisekoi",
       text: "My favorite managa ever!!!  assumenda hic temporibus commodi maiores eius suscipit estnobis deleniti accusamus quidem, pariatur ",
-      replies: [
-        {
-          user: "Toriyama",
-          comment: "Thank you!!",
-        },
-      ],
+      replies: [],
       likes: ["Toriyama", "Josh", "Paul", "Tam"],
     },
   ],
 };
 const FAKE_DATA_USERS = [
   {
-    user: "JOSH",
+    user: "josh",
     id: 4242,
     icon: "https://lh3.googleusercontent.com/ogw/AF2bZyguZwD8JOe52YGQuoTJ4azrOXJukSvFq2a391Y9=s32-c-mo",
   },

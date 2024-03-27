@@ -30,7 +30,11 @@ const ThreadCard = ({ user, id, icon, threads }: User) => {
               <div className="flex place-items-center gap-4">
                 <div className="flex justify-center place-items-center border rounded-full size-10 relative">
                   {icon ? (
-                    <img src={icon} alt="" className="rounded-full w-full" />
+                    <img
+                      src={icon}
+                      alt="profileIcon"
+                      className="rounded-full w-full"
+                    />
                   ) : (
                     <p>?</p>
                   )}
@@ -43,17 +47,22 @@ const ThreadCard = ({ user, id, icon, threads }: User) => {
                 <span>{user}</span>
               </div>
               <div className="flex gap-2 place-items-center">
-                <span className="opacity-60">23h</span>
+                <span className=" text-black/50 dark:text-white/30 ">23h</span>
                 <BsThreeDots />
               </div>
             </div>
             <div className="flex">
-              <div className="border w-px h-auto ml-4 my-2"></div>
+              <div
+                className={`${
+                  thread.replies.length > 0 && "border"
+                } w-px h-auto ml-4 my-2`}
+              />
+
               <div className="flex flex-col ml-4 mt-2">
                 <p>
                   Manga: <span className="font-medium">{thread.manga}</span>
                 </p>
-                <p>
+                <p className="text-sm">
                   {thread.text} Lorem, ipsum dolor sit amet consectetur
                   adipisicing elit. Illo nisi distinctio autem odio! Odio
                 </p>
@@ -68,26 +77,39 @@ const ThreadCard = ({ user, id, icon, threads }: User) => {
           </div>
 
           <div className="flex gap-2">
-            {FAKE_DATA_USERS.length > 1 && (
-              <div className="flex justify-center flex-wrap w-11 h-11">
+            <div className="flex justify-center flex-wrap w-11 h-11">
+              {thread.replies[0] && (
                 <img
                   src={FAKE_DATA_USERS[0].icon}
                   className="rounded-full size-5 object-cover mt-2"
                 />
+              )}
+              {thread.replies[1] && (
                 <img
                   src={FAKE_DATA_USERS[1].icon}
-                  className="rounded-full size-6 object-cover  "
+                  className="rounded-full size-5 object-cover mt-2"
                 />
+              )}
+              {thread.replies[2] && (
                 <img
                   src={FAKE_DATA_USERS[2].icon}
-                  className="rounded-full size-4 object-cover"
+                  className="rounded-full size-5 object-cover"
                 />
-              </div>
-            )}
-            <span className="flex place-items-center gap-1 text-sm opacity-60">
-              {thread.replies?.length > 0 && `${thread.replies.length} replies`}
+              )}
+            </div>
+
+            <span className="flex place-items-center gap-1 text-sm  text-black/50 dark:text-white/30">
+              {thread.replies?.length > 0 && (
+                <span className="cursor-pointer">
+                  {thread.replies.length} replies
+                </span>
+              )}
               {thread.likes?.length && thread.replies?.length > 0 && <LuDot />}
-              {thread.likes?.length > 0 && `${thread.likes.length} likes`}
+              {thread.likes?.length > 0 && (
+                <span className="cursor-pointer">
+                  {thread.likes.length} likes
+                </span>
+              )}
             </span>
           </div>
         </div>

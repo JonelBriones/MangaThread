@@ -1,5 +1,6 @@
 .add-user-icon {
   position: absolute;
+
   bottom: -5px;
   right: -5px;
 }
@@ -8,7 +9,7 @@
   height: 240px;
 }
 .home-icon {
-  transition: all 200ms ease-in-out;
+  transition: scale 200ms ease-in-out;
 }
 .home-icon:hover {
   scale: 1.05;

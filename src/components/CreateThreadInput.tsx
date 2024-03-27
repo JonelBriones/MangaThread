@@ -1,164 +1,60 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FAKE_DATA_PROFILE, FAKE_DATA_MANGAS } from "../data/data";
-import { FaCheck } from "react-icons/fa6";
-import { FcCancel } from "react-icons/fc";
+import React, { useState } from "react";
+import { FAKE_DATA_PROFILE as profile } from "../data/data";
 
-import { HiOutlinePlusCircle } from "react-icons/hi2";
-
-type Thread = {
-  manga: string;
-  text: string;
-};
+import ThreadPostForm, { Thread } from "./ThreadPostForm";
 
 const defaultThreadForm = {
   manga: "",
   text: "",
 };
 
-type User = {
-  user: string;
-  id: number;
-  icon: string;
-  threads: Thread[];
-};
-type Manga = {
-  title: string;
-  author: string;
-  id: number;
-};
-type SearchResults = {
-  searchMangaResults: Manga[];
-};
-
 const CreateThreadInput = () => {
-  const ref = useRef<HTMLFormElement | null>(null);
-  const [profile, setUser] = useState<User>(FAKE_DATA_PROFILE);
-  const { user, id, icon, threads } = profile;
-  const [thread, setThread] = useState<Thread | null>(null);
-  const [threadInput, setThreadInput] = useState<Thread>(defaultThreadForm);
   const [showCreateModel, setShowCreateModel] = useState(false);
-  const [onShowSelect, setOnShowSelect] = useState(0);
-  const [searchManga, setSearchManga] = useState("");
-  const [searchMangaResults, setSearchMangaResults] = useState<Manga[]>([]);
-  const [selectManga, setSelectManga] = useState("");
+  const [thread, setThread] = useState(defaultThreadForm);
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setThreadInput((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const onChangeHandler = (fields: Partial<Thread>) => {
+    console.log(fields);
+    setThread((prev) => {
+      return { ...prev, ...fields };
+    });
   };
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setThread(threadInput);
-    setThreadInput(defaultThreadForm);
+    const { manga, text } = thread;
+    if (!manga || !text) return;
+    console.log("submitting post");
+    setShowCreateModel(false);
   };
-
-  const onSearchManga = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-
-    value.toLocaleLowerCase;
-    setSearchMangaResults(
-      FAKE_DATA_MANGAS.filter((manga: Manga) =>
-        manga.title.toLocaleLowerCase().includes(value)
-      )
-    );
-    setSearchManga(value);
-  };
-
-  useEffect(() => {
-    if (!showCreateModel) return;
-    let handler = (e: any) => {
-      if (ref.current == e.target) {
-        setShowCreateModel(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  }, [showCreateModel]);
 
   return (
-    <div>
-      <div onClick={() => setShowCreateModel(true)}>
-        <label>Start a thread...</label>
-        <button>Post</button>
+    <div className="hidden sm:flex items-center justify-between py-2">
+      <div className="size-10">
+        <img
+          src={profile.icon}
+          alt="profileIcon"
+          className="rounded-full cursor-pointer w-full"
+        />
       </div>
+      <label
+        className="flex-1 px-3 text-sm text-neutral-400 cursor-text"
+        onClick={() => setShowCreateModel(true)}
+      >
+        Start a thread...
+      </label>
+      <button className="bg-neutral-400/70 text-white dark:text-black  font-medium py-1 px-4 rounded-full cursor-not-allowed">
+        Post
+      </button>
+
       {showCreateModel && (
-        <form
-          onSubmit={onSubmitHandler}
-          ref={ref}
-          className={`fixed inset-0 bg-black text-black dark:text-white bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-10 `}
-        >
-          <div className="overflow-hidden">
-            <h4 className={`text-center mb-2 font-medium text-white`}>
-              New thread
-            </h4>
-            <div className="bg-white dark:bg-neutral-900 border border-white dark:border-neutral-300 rounded-xl threadForm p-8 overflow-auto ">
-              <div className="flex gap-4">
-                <img src={icon} alt="" className="rounded-full size-10  " />
-                <div className="flex flex-col">
-                  <p>{user}</p>
-                  <div className="flex flex-col  ">
-                    {selectManga ? (
-                      <div
-                        className="flex items-center gap-2 cursor-pointer"
-                        onClick={() => setSelectManga("")}
-                      >
-                        <FcCancel size={"1.5rem"} />
-                        <p className="text-lg font-medium">{selectManga}</p>
-                      </div>
-                    ) : (
-                      <div className="flex  justify-between place-items-start ">
-                        <input
-                          type="text"
-                          name="search"
-                          value={searchManga}
-                          onChange={onSearchManga}
-                          placeholder="search manga..."
-                          className="dark:text-neutral-300 bg-transparent outline-none text-lg font-medium"
-                          autoComplete="off"
-                        />
-                        <div className="flex justify-between w-full">
-                          <div className="flex-col">
-                            {searchManga != "" &&
-                              searchMangaResults?.map((manga: Manga) => (
-                                <div
-                                  key={manga.id}
-                                  onMouseEnter={() => setOnShowSelect(manga.id)}
-                                  onMouseLeave={() => setOnShowSelect(0)}
-                                  className="flex gap-2 justify-between items-center cursor-pointer"
-                                  onClick={() => setSelectManga(manga.title)}
-                                >
-                                  {onShowSelect == manga.id && (
-                                    <FaCheck size={"1.5rem"} />
-                                  )}
-                                  <p className="text-lg font-medium">
-                                    {manga.title}
-                                  </p>
-                                </div>
-                              ))}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    <input
-                      type="text"
-                      name="text"
-                      value={threadInput.text}
-                      placeholder="Start a thread..."
-                      onChange={onChangeHandler}
-                      className="dark:text-neutral-300 bg-transparent outline-none"
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
+        <ThreadPostForm
+          {...thread}
+          onChangeHandler={onChangeHandler}
+          onSubmitHandler={onSubmitHandler}
+          showCreateModel={showCreateModel}
+          setShowCreateModel={setShowCreateModel}
+          setThread={setThread}
+        />
       )}
     </div>
   );

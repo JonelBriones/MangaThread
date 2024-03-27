@@ -6,7 +6,7 @@ const RootLayout = () => {
   const darkMode = FAKE_DATA_PROFILE.mode;
   return (
     <div className="w-full bg-white dark:bg-black ">
-      <main className="flex flex-col m-auto sm:max-w-screen-lg text-black dark:text-white ">
+      <main className="flex flex-col m-auto sm:max-w-screen-lg text-black dark:text-white">
         <Navbar />
         <Home />
       </main>

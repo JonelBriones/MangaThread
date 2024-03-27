@@ -12,7 +12,6 @@ type User = {
 const Home = () => {
   const [user, setUser] = useState<User>(FAKE_DATA_PROFILE);
 
-  console.log(user);
   return (
     <section className="flex flex-col w-11/12 m-auto sm:w-3/5">
       <div className="sm:hidden w-full flex justify-center space-x-4">
