@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FcCancel } from "react-icons/fc";
+import { IoSearch } from "react-icons/io5";
+
 import {
   FAKE_DATA_MANGAS as mangaList,
   FAKE_DATA_PROFILE as profile,
@@ -86,7 +87,7 @@ const ThreadPostForm = ({
                       className="flex items-center gap-2 cursor-pointer"
                       onClick={() => setThread({ manga: "", text })}
                     >
-                      <FcCancel size={"1.5rem"} />
+                      <IoSearch size={"1.5rem"} />
                       <p className="text-lg font-medium">{manga}</p>
                     </div>
                   )}

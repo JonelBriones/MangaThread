@@ -9,18 +9,24 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 
 import { HiComputerDesktop } from "react-icons/hi2";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegMoon } from "react-icons/fa";
 import { TbBrightnessUp } from "react-icons/tb";
-import { FAKE_DATA_PROFILE } from "../data/data";
+let preferenceDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 const Navbar = () => {
   const [darkMode, setToggleMode] = useState(localStorage.theme);
   const [toggleDropdownSettings, setToggleDropdownSettings] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+
+  if (!darkMode) {
+    if (preferenceDark) {
+      setToggleMode("dark");
+    } else {
+      setToggleMode("light");
+    }
+  }
 
   useEffect(() => {
-    // automatically check os system preference
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
@@ -56,6 +62,7 @@ const Navbar = () => {
     setAppearanceShow(false);
     setToggleDropdownSettings(!toggleDropdownSettings);
   }
+
   return (
     <>
       <div
@@ -107,10 +114,20 @@ const Navbar = () => {
         <div className="px-6 h-fit w-fit">
           <a
             href="#"
-            className="dark:menu-hover relative select-none"
+            className="relative select-none"
             onClick={() => toggleMenu()}
           >
-            <PiList size={"2rem"} />
+            <PiList
+              size={"2rem"}
+              className="dark:hover:text-white hover:text-black transition-colors duration-300 ease-in-out"
+              color={
+                toggleDropdownSettings && darkMode == "dark"
+                  ? "white"
+                  : toggleDropdownSettings && darkMode == "light"
+                  ? "black"
+                  : ""
+              }
+            />
           </a>
           {toggleDropdownSettings && (
             <div
@@ -125,7 +142,7 @@ const Navbar = () => {
                       onClick={() => setAppearanceShow(false)}
                       className=" absolute top-1 left-0 cursor-pointer "
                     />
-                    <h3>Appearance</h3>
+                    <h3 className="text-black dark:text-white">Appearance</h3>
                   </div>
                   <div className="flex justify-center mt-2">
                     <div
@@ -163,7 +180,7 @@ const Navbar = () => {
                 </div>
               ) : (
                 <button
-                  className=" p-3 text-left rounded-t-lg font-[400]"
+                  className=" p-3 text-left rounded-t-lg font-[400] text-black  dark:text-white "
                   onClick={() => setAppearanceShow(true)}
                 >
                   Appearance
@@ -172,7 +189,7 @@ const Navbar = () => {
               {!appearanceShow &&
                 links.map((link) => (
                   <a
-                    className="p-3 border-t border-neutral-200 dark:border-neutral-600 font-[400]"
+                    className="p-3 border-t border-neutral-200 dark:border-neutral-600 text-black dark:text-white font-[400]"
                     key={link}
                   >
                     {link}

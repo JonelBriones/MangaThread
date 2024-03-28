@@ -13,7 +13,6 @@ const CreateThreadInput = () => {
   const [thread, setThread] = useState(defaultThreadForm);
 
   const onChangeHandler = (fields: Partial<Thread>) => {
-    console.log(fields);
     setThread((prev) => {
       return { ...prev, ...fields };
     });
@@ -25,6 +24,7 @@ const CreateThreadInput = () => {
     if (!manga || !text) return;
     console.log("submitting post");
     setShowCreateModel(false);
+    setThread(defaultThreadForm);
   };
 
   return (
@@ -42,7 +42,7 @@ const CreateThreadInput = () => {
       >
         Start a thread...
       </label>
-      <button className="bg-neutral-400/70 text-white dark:text-black  font-medium py-1 px-4 rounded-full cursor-not-allowed">
+      <button className="bg-neutral-400/70 text-white dark:text-black  font-medium py-1 px-3 rounded-full cursor-not-allowed">
         Post
       </button>
 

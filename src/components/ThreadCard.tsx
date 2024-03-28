@@ -3,24 +3,10 @@ import { GoHeart, GoPaperAirplane } from "react-icons/go";
 import { AiOutlineMessage, AiOutlineRetweet } from "react-icons/ai";
 import { LuDot } from "react-icons/lu";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
-import { FAKE_DATA_USERS, FAKE_DATA_PROFILE } from "../data/data";
-type Thread = {
-  id: 0;
-  manga: string;
-  text: string;
-  replies: [];
-  likes: string[];
-};
+import { FAKE_DATA_USERS, FAKE_DATA_PROFILE as profile } from "../data/data";
 
-type User = {
-  user: string;
-  id: number;
-  icon: string;
-  threads: Thread[];
-};
-
-const ThreadCard = ({ user, id, icon, threads }: User) => {
-  const darkMode = FAKE_DATA_PROFILE.mode;
+const ThreadCard = () => {
+  const { user, icon, threads } = profile;
   return (
     <div className="text-black dark:text-white">
       {threads?.map((thread) => (

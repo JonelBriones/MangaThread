@@ -2,7 +2,6 @@ const FAKE_DATA_PROFILE = {
   user: "ijonel906",
   id: 906,
   icon: "https://lh3.googleusercontent.com/ogw/AF2bZyguZwD8JOe52YGQuoTJ4azrOXJukSvFq2a391Y9=s32-c-mo",
-
   mode: true,
   threads: [
     {
