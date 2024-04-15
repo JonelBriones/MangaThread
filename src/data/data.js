@@ -115,4 +115,36 @@ const FAKE_DATA_MANGAS = [
     id: 245,
   },
 ];
-export { FAKE_DATA_MANGAS, FAKE_DATA_PROFILE, FAKE_DATA_USERS };
+
+const FAKE_DATA_POSTS = [
+  {
+    username: "ijonel906",
+    id: 333,
+    manga: "Dragonball",
+    text: "I love the dragonball mangas!!",
+    replies: ["i love it", "gg", "gg", "gg"],
+    likes: ["ijonel906", "k"],
+  },
+  {
+    username: "jonelCodes",
+    id: 222,
+    manga: "Naruto",
+    text: "RASENGAAAAAAAAN!!",
+    replies: ["i love it"],
+    likes: ["ijonel906"],
+  },
+  {
+    username: "animelover333",
+    id: 2,
+    manga: "My Hero Academia",
+    text: "I dont like the fanbase but the manga is coooool!",
+    replies: ["gg"],
+    likes: [],
+  },
+];
+export {
+  FAKE_DATA_MANGAS,
+  FAKE_DATA_PROFILE,
+  FAKE_DATA_USERS,
+  FAKE_DATA_POSTS,
+};

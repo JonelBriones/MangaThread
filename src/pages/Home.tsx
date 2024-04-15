@@ -1,5 +1,6 @@
 import ThreadCard from "../components/ThreadCard";
 import CreateThreadInput from "../components/CreateThreadInput";
+import RepositoriesList from "../components/RepositoriesList";
 
 const Home = () => {
   return (
@@ -9,7 +10,8 @@ const Home = () => {
         <button className="w-full">Following</button>
       </div>
       <CreateThreadInput />
-      <ThreadCard />
+      {/* <ThreadCard /> */}
+      <RepositoriesList />
     </section>
   );
 };

@@ -24,6 +24,7 @@ const CreateThreadInput = () => {
     if (!manga || !text) return;
     console.log("submitting post");
     setShowCreateModel(false);
+
     setThread(defaultThreadForm);
   };
 
